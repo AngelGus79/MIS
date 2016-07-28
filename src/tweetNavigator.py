@@ -1,4 +1,5 @@
 from twython import Twython
+from user import User
 import settings
 
 class tweetNavigator:
@@ -14,15 +15,28 @@ class tweetNavigator:
         search = t.search(q=self.hashtag)
 
         tweets = search['statuses']
-        lista_de_Usuarios = []
+        users_dictionary = {}
+        u = User()
         for tweet in tweets:
-            lista_de_Usuarios.append(tweet["user"]["name"].encode("utf-8"))
-
-
-        return list(set(lista_de_Usuarios))
+            if not users_dictionary.has_key(tweet['id_str']):
+                u.name = tweet["user"]["name"].encode("utf-8")
+                u.comments.append(tweet['text'])
+                users_dictionary[tweet['id_str']] = u
+            else:
+                u=users_dictionary[tweet['id_str']]
+                u.comments.append(tweet['text'])
+                users_dictionary[tweet['id_str']] = u
+              
+        return users_dictionary
     
     def getComments(self):
         print "algo"
 
 
+tn = tweetNavigator("#sayulita")
+usuarios =tn.getUsers()
 
+for u in usuarios:
+    print "Usuario:" + usuarios[u].name + "\n"
+    for c in usuarios[u].comments:
+        print "Commentarios: " + c.encode("utf-8") + "\n"

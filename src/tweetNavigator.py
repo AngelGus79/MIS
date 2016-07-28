@@ -15,6 +15,26 @@ class tweetNavigator:
             oauth_token=settings.TWITTER_ACCESS_TOKEN,
             oauth_token_secret=settings.TWITTER_ACCESS_TOKEN_SECRET)
 
+    def getSentiment(self, text):
+        endpoint = 'https://japerk-text-processing.p.mashape.com/sentiment/'
+        headers = {
+            'X-Mashape-Key': settings.MASHAPE_KEY,
+        }
+
+        payload = {
+            'language': 'english',
+            'text': text,
+        }
+
+        response = requests.post(endpoint, headers=headers, data=payload)
+        # {"probability": {"neg": 0.36525227438916918, "neutral": 0.56068716327814216, "pos": 0.63474772561083082}, "label": "neutral"}
+        response = response.json()
+
+        return {
+            'text': text,
+            'sentiment': response['label'],
+        }
+
     def getUsers(self):
         search = self.twython.search(q=self.hashtag)
 
@@ -28,12 +48,18 @@ class tweetNavigator:
 
             if not users_dictionary.has_key(tweet['user']['id']):
                 u.name = tweet["user"]["name"].encode("utf-8")
-                u.comments.append(tweet['text'].encode("utf-8"))
+
+                comment = self.getSentiment(tweet['text'].encode('utf-8'))
+                u.comments.append(comment)
+
                 users_dictionary[tweet['user']['id']] = u
                 users_list.append(u.getFormatedName())
             else:
                 u = users_dictionary[tweet['user']['id']]
-                u.comments.append(tweet['text'].encode("utf-8"))
+
+                comment = self.getSentiment(tweet['text'].encode('utf-8'))
+                u.comments.append(comment)
+
                 users_dictionary[tweet['user']['id']] = u
 
         #Asignacion de genero
@@ -63,4 +89,5 @@ usuarios = tn.getUsers()
 for u in usuarios:
     print "Usuario: " + usuarios[u].formated_name + " Genero: " + usuarios[u].gender
     for c in usuarios[u].comments:
-        print "comentario: " + c
+        print 'sentimiento: ' + c['sentiment']
+        print "comentario: " + c['text']

@@ -12,4 +12,5 @@ Proyecto del curso propedéutico para ingresar a la MIS
 pip install twython
 pip install mock
 pip install requests
+pip install httpretty
 ```

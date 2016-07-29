@@ -1,6 +1,13 @@
 # MIS
 
-Proyecto del curso propedéutico para ingresar a la MIS
+Proyecto del curso propedéutico para ingresar a la MIS. Consiste en:
+
+- Determinar cuantos hombres y cuantas mujeres hablan de sayulita.
+- Determinar el sentimiento de la gente que visita sayulita.
+
+El proyecto consiste en una librería que puede importarse en un proyecto que
+quiera hacer algo con los datos devueltos, como ejemplo se hizo un proyecto
+básico de django que utiliza la librería para presentar los datos visualmente.
 
 ## Dependencias
 

@@ -1,0 +1,10 @@
+Django==1.9.8
+funcsigs==1.0.2
+httpretty==0.8.14
+mock==2.0.0
+oauthlib==1.1.2
+pbr==1.10.0
+requests==2.10.0
+requests-oauthlib==0.6.2
+six==1.10.0
+twython==3.4.0

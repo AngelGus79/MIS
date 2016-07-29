@@ -1,0 +1,16 @@
+{
+  "name": "sayulita-django",
+  "version": "1.0.0",
+  "description": "Ejemplo de uso de la librería de análisis de sayulita en twitter",
+  "main": "index.js",
+  "dependencies": {
+    "jquery": "^3.1.0",
+    "chart.js": "^2.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

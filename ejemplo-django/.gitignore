@@ -1,0 +1,6 @@
+db.sqlite*
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+static/node_modules/*

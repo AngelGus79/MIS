@@ -31,8 +31,11 @@ $ pip install twython mock requests httpretty
 
 ## Ejemplos de uso
 
-Pueden verse en la carpeta `test/` o bien en el `ejemplo-django/` que contiene
-las instrucciones de instalación en [ejemplo-django/README.md](ejemplo-django/README.md)
+Pueden verse en los tests o bien en el [`ejemplo-django/`](ejemplo-django/)
+donde se encuentran las instrucciones de instalación para ver los datos gráficos [ejemplo-django/README.md](ejemplo-django/README.md).
+
+Adicional se incluye el script [`src/main.py`](src/main.py) que utiliza las
+funciones de la librería para mostrar los datos en la línea de comandos.
 
 ## Ejecución de los tests
 

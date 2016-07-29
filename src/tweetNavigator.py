@@ -41,7 +41,6 @@ class tweetNavigator:
         tweets = search['statuses']
         users_dictionary = {}
         users_list = []
-        
 
         for tweet in tweets:
             u = User()
@@ -73,7 +72,7 @@ class tweetNavigator:
                     if not gender["gender"]:
                         users_dictionary[user].gender = 'undefined'
                     else:
-                        users_dictionary[user].gender = gender["gender"]
+                        users_dictionary[user].gender = gender["gender"].encode('utf-8')
 
                     genders_dictionary.remove(gender)
                     break

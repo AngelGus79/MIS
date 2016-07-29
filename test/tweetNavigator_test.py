@@ -21,14 +21,12 @@ class TweetNavigatorTest(unittest.TestCase):
         mock_tw().search.return_value = {
             'statuses': [
                 {
-                    'user': {'name': 'Juan'},
-                    'text': 'Hola',
-                    'id_str': '1122'
+                    'user': {'name': 'Juan', 'id': '1122'},
+                    'text': 'Hola'
                 },
                 {
-                    'user': {'name': 'Pedro'},
+                    'user': {'name': 'Pedro', 'id': '1234'},
                     'text': 'Adios',
-                    'id_str': '1234'
                 },
             ]
         }
@@ -45,6 +43,17 @@ class TweetNavigatorTest(unittest.TestCase):
                },
               "label": "neutral"
             }
+            ''',
+            content_type="application/json")
+
+        httpretty.register_uri(
+            httpretty.GET,
+            'https://api.genderize.io/?name[0]=Juan&name[1]=Pedro',
+            body='''
+            [
+                {"name":"Juan","gender":"male","probability":"1.00","count":796},
+                {"name":"Pedro","gender":"female","probability":"0.94","count":70}
+            ]
             ''',
             content_type="application/json")
 

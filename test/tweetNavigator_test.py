@@ -9,7 +9,7 @@ test_path = os.path.abspath(os.path.join(__file__, os.pardir))
 project_path = os.path.abspath(os.path.join(test_path, os.pardir))
 sys.path.append(project_path)
 
-from src.tweetNavigator import tweetNavigator, User
+from src.tweetNavigator import TweetNavigator, User
 
 
 class TweetNavigatorTest(unittest.TestCase):
@@ -57,7 +57,7 @@ class TweetNavigatorTest(unittest.TestCase):
             ''',
             content_type="application/json")
 
-        navigator = tweetNavigator('sayulita')
+        navigator = TweetNavigator('sayulita')
         users = navigator.getUsers()
 
         self.assertEqual(2, len(users))

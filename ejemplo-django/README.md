@@ -3,6 +3,8 @@
 Este proyecto solo muestra gráficamente las estadísticas generadas por el
 proyecto de [Sayulita MIS](https://github.com/AngelGus79/MIS).
 
+![Preview](sayulita-screenshot.png)
+
 # Dependencias
 
 - Python 2.7

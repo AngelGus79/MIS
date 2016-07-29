@@ -25,4 +25,4 @@ $ pip install twython mock requests httpretty
 ## Ejemplos de uso
 
 Pueden verse en la carpeta `test/` o bien en el `ejemplo-django/` que contiene
-las instrucciones de instalación en `ejemplo-django/README.md`.
+las instrucciones de instalación en [ejemplo-django/README.md](ejemplo-django/README.md)

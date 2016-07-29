@@ -1,8 +1,6 @@
-import mock
 import unittest
 import os
 import sys
-import httpretty
 
 # Update python path
 test_path = os.path.abspath(os.path.join(__file__, os.pardir))

@@ -11,6 +11,7 @@ class User:
         self.comments = []
         self.gender = "undefined"
         self.formated_name = ""
+        self.sentiment = 'neutral'
 
     def getFormatedName(self):
         formated_name = self.name.strip()
@@ -31,13 +32,19 @@ class User:
             else:
                 neutral += 1
 
+        # Es neutral si hay misma cantidad de comentarios positivos y negativos
         if positive == negative or (neutral > positive and neutral > negative):
-            return 'neutral'
+            self.sentiment = 'neutral'
 
-        if positive > negative:
-            return 'positive'
-        if negative > positive:
-            return 'negative'
+        # Es positivo si hay más comentarios positivos que negativos
+        elif positive > negative:
+            self.sentiment = 'positive'
+
+        # Es negativo si hay más comentarios negativos que positivos
+        elif negative > positive:
+            self.sentiment = 'negative'
+
+        return self.sentiment
 
     def getGender(self):
         name = self.name

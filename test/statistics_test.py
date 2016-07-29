@@ -50,25 +50,29 @@ class TweetNavigatorTest(unittest.TestCase):
         s = Statistics(self.users)
         sentiments = s.getUsersSentiment()
 
-        # Conteo de sentimientos por todos los usuarios
-        self.assertEqual(2, sentiments['all']['positive'])
-        self.assertEqual(1, sentiments['all']['negative'])
-        self.assertEqual(0, sentiments['all']['neutral'])
-
         # Conteo de sentimientos solo female
         self.assertEqual(1, sentiments['female']['positive'])
         self.assertEqual(0, sentiments['female']['negative'])
         self.assertEqual(0, sentiments['female']['neutral'])
+        self.assertEqual(1, sentiments['female']['count'])
 
         # Conteo de sentimientos solo male
         self.assertEqual(1, sentiments['male']['positive'])
         self.assertEqual(1, sentiments['male']['negative'])
         self.assertEqual(0, sentiments['male']['neutral'])
+        self.assertEqual(2, sentiments['male']['count'])
 
         # Conteo de sentimientos solo indefinidos
         self.assertEqual(0, sentiments['undefined']['positive'])
         self.assertEqual(0, sentiments['undefined']['negative'])
         self.assertEqual(0, sentiments['undefined']['neutral'])
+        self.assertEqual(0, sentiments['undefined']['count'])
+
+        # Conteo de sentimientos por todos los usuarios
+        self.assertEqual(2, sentiments['all']['positive'])
+        self.assertEqual(1, sentiments['all']['negative'])
+        self.assertEqual(0, sentiments['all']['neutral'])
+        self.assertEqual(3, sentiments['all']['count'])
 
 if __name__ == '__main__':
     unittest.main()

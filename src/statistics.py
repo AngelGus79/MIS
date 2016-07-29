@@ -28,10 +28,6 @@ class Statistics:
         }
 
     def getUsersSentiment(self):
-        positive = 0
-        negative = 0
-        neutral = 0
-
         # Para guardar conteos de mujeres
         female_positive = 0
         female_negative = 0
@@ -51,8 +47,6 @@ class Statistics:
             sentiment = user.getSentiment()
 
             if sentiment == 'positive':
-                positive += 1
-
                 if user.gender == 'female':
                     female_positive += 1
                 elif user.gender == 'male':
@@ -61,8 +55,6 @@ class Statistics:
                     undefined_positive += 1
 
             elif sentiment == 'negative':
-                negative += 1
-
                 if user.gender == 'female':
                     female_negative += 1
                 elif user.gender == 'male':
@@ -71,8 +63,6 @@ class Statistics:
                     undefined_negative += 1
 
             elif sentiment == 'neutral':
-                neutral += 1
-
                 if user.gender == 'female':
                     female_neutral += 1
                 elif user.gender == 'male':
@@ -80,12 +70,7 @@ class Statistics:
                 else:
                     undefined_neutral += 1
 
-        return {
-            'all': {
-                'positive': positive,
-                'negative': negative,
-                'neutral': neutral,
-            },
+        data = {
             'female': {
                 'positive': female_positive,
                 'negative': female_negative,
@@ -102,3 +87,20 @@ class Statistics:
                 'neutral': undefined_neutral,
             },
         }
+
+        data['all'] = {
+            'positive': female_positive + male_positive + undefined_positive,
+            'negative': female_negative + male_negative + undefined_negative,
+            'neutral': female_neutral + male_neutral + undefined_neutral,
+        }
+
+        # Calcular totales
+        data['male']['count'] = male_positive + male_negative + male_neutral
+        data['female']['count'] = female_positive + female_negative + female_neutral
+        data['undefined']['count'] = undefined_positive + undefined_negative + undefined_neutral
+
+        data['all']['count'] = data['female']['count'] + \
+            data['male']['count'] + \
+            data['undefined']['count']
+
+        return data

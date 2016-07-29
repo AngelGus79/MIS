@@ -1,41 +1,61 @@
-# -*- coding: utf-8 -*-
 from twython import Twython
+from user import User
+from tweetNavigator import TweetNavigator
+from statistics import Statistics
 import settings
 
-# Ejemplo de tweets
-t = Twython(app_key=settings.TWITTER_APP_KEY,
-            app_secret=settings.TWITTER_APP_KEY_SECRET,
-            oauth_token=settings.TWITTER_ACCESS_TOKEN,
-            oauth_token_secret=settings.TWITTER_ACCESS_TOKEN_SECRET)
+#Mostrar comentarios por Usuario
+tweet_Sayulita = TweetNavigator("#sayulita")
+users_Sayulita = tweet_Sayulita.getUsers()
+print "\n"   
+print "--------------------------------------------------------COMENTARIOS POR USUARIO---------------------------------------------------"   
+print "\n"  
+u=0
+for user in users_Sayulita:
+    u += 1
+    UserSentiment = users_Sayulita[user].getSentiment()
+    print str(u).zfill(2) + ". User name: " + users_Sayulita[user].name + " Gender: " + users_Sayulita[user].gender + "   User Sentiment: " + UserSentiment
 
-search = t.search(q='#sayulita')
+    c = 0
+    for comment in users_Sayulita[user].comments:
+        c += 1
+        print "comment " + str(c).zfill(2) + ": " + comment['text']
+        print "sentiment: " + comment['sentiment'] + " \n"
 
-tweets = search['statuses']
+    print "-----------------------------------------------------------------------------------------------------------------------------------------------------------------"   
+    print "\n"
 
-for tweet in tweets:
-    print tweet
+  
+print "-----------------------------------------------------------------------------ESTADISTICAS----------------------------------------------------------------------------"   
+print "\n" 
 
-# Ejemplo de genero
-import requests
-names = ['John', 'Lauren', 'Peter']
+statistics_Sayulita = Statistics(users_Sayulita)
+statistics_Sentiment_Sayulita = statistics_Sayulita.getUsersSentiment()
 
-payload = {'name[]': names}
-response = requests.get('https://api.genderize.io', params=payload)
-print response.json()
+print "female positive: " + str(statistics_Sentiment_Sayulita['female']['positive']) +  "\n"
+print "female negative: " + str(statistics_Sentiment_Sayulita['female']['negative']) +  "\n"
+print "female neutral: " + str(statistics_Sentiment_Sayulita['female']['neutral']) +  "\n\n"
 
-# Ejemplo de análisis de sentimiento
-import requests
+print "male positive: " + str(statistics_Sentiment_Sayulita['male']['positive']) +  "\n"
+print "male negative: " + str(statistics_Sentiment_Sayulita['male']['negative']) +  "\n"
+print "male neutral: " + str(statistics_Sentiment_Sayulita['male']['neutral']) +  "\n\n"
 
-endpoint = 'https://japerk-text-processing.p.mashape.com/sentiment/'
-headers = {
-    'X-Mashape-Key': settings.MASHAPE_KEY,
-}
+print "undefined positive: " + str(statistics_Sentiment_Sayulita['undefined']['positive']) +  "\n"
+print "undefined negative: " + str(statistics_Sentiment_Sayulita['undefined']['negative']) +  "\n"
+print "undefined neutral: " + str(statistics_Sentiment_Sayulita['undefined']['neutral']) +  "\n\n"
 
-payload = {
-    'language': 'english',
-    'text': 'see you later',
-}
+print "all positive: " + str(statistics_Sentiment_Sayulita['all']['positive']) +  "\n"
+print "all negative: " + str(statistics_Sentiment_Sayulita['all']['negative']) +  "\n"
+print "all neutral: " + str(statistics_Sentiment_Sayulita['all']['neutral']) +  "\n\n"
 
-response = requests.post(endpoint, headers=headers, data=payload)
-print response.text
-# {"probability": {"neg": 0.36525227438916918, "neutral": 0.56068716327814216, "pos": 0.63474772561083082}, "label": "neutral"}
+print "male count: " + str(statistics_Sentiment_Sayulita['male']['count']) +  "\n"
+print "female count: " + str(statistics_Sentiment_Sayulita['female']['count']) +  "\n"
+print "undefined count: " + str(statistics_Sentiment_Sayulita['undefined']['count']) +  "\n"
+print "all count: " + str(statistics_Sentiment_Sayulita['all']['count']) +  "\n"
+
+
+
+
+
+
+

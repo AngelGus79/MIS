@@ -5,7 +5,7 @@ import settings
 import requests
 
 
-class tweetNavigator:
+class TweetNavigator:
     def __init__(self, hashtag):
         self.hashtag = hashtag
 
@@ -79,14 +79,8 @@ class tweetNavigator:
       
         return users_dictionary
 
-    def getComments(self):
-        print "algo"
 
-tn = tweetNavigator("#sayulita")
-usuarios = tn.getUsers()
+         
 
-for u in usuarios:
-    print "Usuario: " + usuarios[u].formated_name + " Genero: " + usuarios[u].gender
-    for c in usuarios[u].comments:
-        print 'sentimiento: ' + c['sentiment']
-        print "comentario: " + c['text']
+ 
+

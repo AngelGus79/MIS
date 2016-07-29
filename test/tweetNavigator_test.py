@@ -64,6 +64,7 @@ class TweetNavigatorTest(unittest.TestCase):
         user = users['1122']
         self.assertIsInstance(user, User)
         self.assertEqual('Juan', user.name)
+        self.assertEqual('male', user.gender)
 
         self.assertEqual(
             [{'sentiment': 'neutral', 'text': 'Hola'}],

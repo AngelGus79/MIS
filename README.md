@@ -19,10 +19,7 @@ Colocar las llaves en el archivo `src/settings.py`
 
 ``` sh
 $ git clone git@github.com:AngelGus79/MIS.git
-$ pip install twython
-$ pip install mock
-$ pip install requests
-$ pip install httpretty
+$ pip install twython mock requests httpretty
 ```
 
 ## Ejemplos de uso
